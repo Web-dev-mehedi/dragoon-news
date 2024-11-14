@@ -24,7 +24,7 @@ const HomeLayouts = () => {
              <Navbar/>
         </nav>
         {/* main comp */}
-        <main className="grid md:grid-cols-12 py-20">
+        <main className="grid md:grid-cols-12 py-20 gap-6">
             {/* left side content */}
              <aside className="col-span-3">
                   leftAside
@@ -33,7 +33,6 @@ const HomeLayouts = () => {
              {/* middle content */}
              <section className="col-span-6">
                    main post
-                   <MainComp/>
                    {/*  */}
                   <Outlet/>
              </section>

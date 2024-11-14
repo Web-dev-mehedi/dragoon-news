@@ -4,3 +4,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+ .active{
+    background-color: rgba(167, 167, 167, 0.863)!important;
+    color: black;
+}

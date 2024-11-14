@@ -15,10 +15,10 @@ export const router = createBrowserRouter([
         },
         {
           path:"/category/:id",
-          element:<h1>hello from cate</h1>,  
-        //   loader: ()=>{
-        //     fetch("")
-        //   }
+          element:<MainComp/>, 
+          loader: ({params})=>(
+            fetch(`https://openapi.programming-hero.com/api/news/category/${params.id}`)
+          )  
         },
        ]
     },
