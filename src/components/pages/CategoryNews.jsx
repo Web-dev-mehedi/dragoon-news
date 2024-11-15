@@ -1,12 +1,13 @@
 import React from "react";
 import { FaStar, FaEye } from 'react-icons/fa';
+import { Link } from "react-router-dom";
 
 
 const CategoryNews = ({ article }) => {
     
   const {
+    _id,
     author,
-    category_id,
     details,
     image_url,
     rating,
@@ -37,9 +38,9 @@ const CategoryNews = ({ article }) => {
           <h2 className="font-bold text-xl mb-2">{title}</h2>
           <img className="w-full h-80 object-cover" src={thumbnail_url} alt={title} />
           <p className="text-gray-700 text-base mt-4">{details}</p>
-          <a href="/login" className="text-blue-500 hover:text-blue-700">
+          <Link to={`/news/${_id}`} className="text-blue-500 hover:text-blue-700">
             Read More
-          </a>
+          </Link>
         </div>
       </div>
       <div className="px-6 py-4 flex items-center justify-between">
