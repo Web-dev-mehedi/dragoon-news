@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.init";
 
@@ -7,49 +7,26 @@ export const AuthContext = createContext()
 
 const AuthProvider = ({children}) => {
 
-const [user , setUser] = useState(null)
+const [user , setUser] = useState(null);
+const [loading , setLoading] = useState(true);
 
-
-console.log(user)
 
 
 const createUserWithEmailPass=(email,password)=>{
 // 
-      createUserWithEmailAndPassword(auth,email,password)
-      .then(result=>{
-         console.log(result.user)
-         alert(result?.user?.displayName, "your are logged in")
-      }).catch(error=>{
-        console.log(error);
-        alert("error",error)
-      })
+    return createUserWithEmailAndPassword(auth,email,password)
+   
 }
 
+const updateUserProfile =(updatedData)=>{
+   return updateProfile(auth.currentUser, updatedData)
+}
 
-const signIn = (email,pass)=>{
+const signIn = (email,password)=>{
     // 
-    signInWithEmailAndPassword(auth,email,pass)
-    .then(res=>{
-        console.log(res.user);
-        setUser(res.user)
-        alert("sign in successfully")
-
-    }).catch(error=>{
-      console.log(error);
-      alert(error)
-    })
+   return signInWithEmailAndPassword(auth,email,password);
+   
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 // provider
@@ -58,7 +35,7 @@ const GithubProvider = new GithubAuthProvider();
 // google login
 const handleGoogleRegister =()=>{
     // 
-    signInWithPopup(auth,GoogleProvider)
+      signInWithPopup(auth,GoogleProvider)
     .then((result)=>{
        console.log(result);
        setUser(result.user)
@@ -96,7 +73,8 @@ const handleSignOut=()=>{
   useEffect(()=>{
     const unSubscribe = onAuthStateChanged(auth,currentUser=>{
         if(currentUser){
-         setUser(currentUser)
+         setUser(currentUser);
+         setLoading(false);
         }else{
             return ()=>{
                 unSubscribe();
@@ -113,7 +91,10 @@ const authInfo={
     handleGitHubRegister,
     handleSignOut,
     createUserWithEmailPass,
-    signIn
+    signIn,
+    loading,
+    setUser,
+    updateUserProfile
 }
 
 

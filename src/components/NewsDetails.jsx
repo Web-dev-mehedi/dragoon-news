@@ -13,8 +13,8 @@ const NewsDetails = () => {
          <header>
              <Header/>
          </header>
-      <div className="w-11/12 mx-auto grid md:grid-cols-3 gap-8">
-        <div className=" mx-auto col-span-2 ">
+      <div className="w-11/12 mx-auto grid md:grid-cols-4 gap-8">
+        <div className=" mx-auto col-span-3 ">
           <h1 className="text-2xl font-semibold text-black py-8">Dragon news</h1>
           <div className="bg-white shadow-md rounded-lg overflow-hidden p-6 space-y-6">
             <img

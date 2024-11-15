@@ -53,7 +53,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-end text-xl space-x-2 cursor-pointer">
           {
-            user? <><span>{user?.displayName}</span> <Link to onClick={handleSignOut}>Sign Out</Link></> :   <Link to='/auth/login' className="flex justify-center items-center gap-3"><FaUserCircle className="text-4xl " /><span className="bg-[#403F3F] px-6 py-2 text-white font-medium ">Login</span></Link>
+            user? <><img className="w-10 h-10 rounded-full" src={user?.photoURL}/><span className="capitalize">{user?.displayName}</span> <Link onClick={handleSignOut} className="bg-[#403F3F] px-6 py-2 text-white font-medium">Sign Out</Link></> : <Link to='/auth/login' className="flex justify-center items-center gap-3"> <FaUserCircle className="text-4xl " /><span className="bg-[#403F3F] px-6 py-2 text-white font-medium ">Login</span></Link>
           }
       </div>
     </div>

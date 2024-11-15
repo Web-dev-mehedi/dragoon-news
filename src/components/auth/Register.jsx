@@ -1,21 +1,46 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 
 const Register = () => {
-  const {createUserWithEmailPass} = useContext(AuthContext);
 
+  const {createUserWithEmailPass, updateUserProfile} = useContext(AuthContext);
+  const [error, setError] = useState({});
+  const navigate = useNavigate()
   const handleSubmit = (e) => {
+    // 
+    setError({...error, name :"", password :""})
     e.preventDefault();
 
     // new mathood by using Form data to get value from input
     const form = new FormData(e.target)
     const name = form.get("name");
+    if(name.length < 5){
+      setError({...error, name : "name must be upto 5 charecter"});
+      return
+    }
     const url = form.get("url");
     const email = form.get("email");
     const password = form.get("password");
+    if(password.length < 6){
+      setError({...error, password : "password must be upto 6 charecter long"});
+      return
+    }
     createUserWithEmailPass(email,password)
-    console.log({name,email});
+    .then((result)=>{
+     
+      // 
+      updateUserProfile({displayName : name, photoURL : url})
+      .then(()=>{
+         navigate("/auth/login");
+      }).catch(err=>{
+         console.log(err)
+      });
+      alert("register successfully");
+
+   }).catch(err=>{
+     alert("error",err)
+   })
   };
 
   return (
@@ -39,6 +64,11 @@ const Register = () => {
                 required
               />
             </div>
+            {
+              error.name &&  <label className="label text-xs font-semibold text-red-500">
+                {error.name}
+            </label>
+            }
             {/* photo url */}
             <div className="form-control">
               <label className="label text-xl font-semibold text-[#403F3F]">
@@ -78,6 +108,11 @@ const Register = () => {
                 required
               />
             </div>
+            {
+              error.password &&  <label className="label text-xs font-semibold text-red-500">
+                {error.password}
+            </label>
+            }
             {/* check box */}
             <div className="form-control">
               <label className="cursor-pointer label flex-row-reverse justify-end gap-5 ">
