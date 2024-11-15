@@ -37,7 +37,7 @@ const CategoryNews = ({ article }) => {
           <h2 className="font-bold text-xl mb-2">{title}</h2>
           <img className="w-full h-80 object-cover" src={thumbnail_url} alt={title} />
           <p className="text-gray-700 text-base mt-4">{details}</p>
-          <a href="#" className="text-blue-500 hover:text-blue-700">
+          <a href="/login" className="text-blue-500 hover:text-blue-700">
             Read More
           </a>
         </div>

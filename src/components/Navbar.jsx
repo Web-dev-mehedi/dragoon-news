@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Navbar = () => {
+  const {user,handleSignOut} = useContext(AuthContext)
     const links=<>
      <li>
-       <NavLink>Home</NavLink>
+       <NavLink to='/'>Home</NavLink>
       </li>
       <li>
-         <NavLink>About</NavLink>
+         <NavLink to='/about'>About</NavLink>
       </li>
       <li>
-         <NavLink>Career</NavLink>
+         <NavLink to="/career">Career</NavLink>
       </li>
     </>
        
@@ -50,8 +52,9 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end text-xl space-x-2 cursor-pointer">
-        <Link className="text-4xl"><FaUserCircle /></Link>
-        <a className="bg-[#403F3F] px-6 py-2 text-white font-medium ">Login</a>
+          {
+            user? <><span>{user?.displayName}</span> <Link to onClick={handleSignOut}>Sign Out</Link></> :   <Link to='/auth/login' className="flex justify-center items-center gap-3"><FaUserCircle className="text-4xl " /><span className="bg-[#403F3F] px-6 py-2 text-white font-medium ">Login</span></Link>
+          }
       </div>
     </div>
   );

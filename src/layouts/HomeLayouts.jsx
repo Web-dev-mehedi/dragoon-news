@@ -3,7 +3,6 @@ import Header from "../components/Header";
 import BreakingNews from "../components/BreakingNews";
 import Navbar from "../components/Navbar";
 import LeftSideComp from "../components/layout-componrnts/LeftSideComp";
-import MainComp from "../components/layout-componrnts/MainComp";
 import RightComp from "../components/layout-componrnts/RightComp";
 import { Outlet } from "react-router-dom";
 

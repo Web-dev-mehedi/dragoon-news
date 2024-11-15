@@ -1,6 +1,8 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import HomeLayouts from "../layouts/HomeLayouts";
 import MainComp from "../components/layout-componrnts/MainComp";
+import Login from "../components/auth/Login";
+import Register from "../components/auth/Register";
 
 
 
@@ -27,8 +29,12 @@ export const router = createBrowserRouter([
         element:<h1>hello from news</h1>
     },
     {
-        path:"/auth",
-        element:<h1>hello from auth</h1>
+        path:"auth/login",
+        element:<Login/>
+    },
+    {
+        path:"auth/register",
+        element:<Register/>
     },
     {
         path:"*",
